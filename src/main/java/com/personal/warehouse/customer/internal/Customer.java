@@ -1,5 +1,7 @@
 package com.personal.warehouse.customer.internal;
 
+import org.springframework.modulith.NamedInterface;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +19,8 @@ import lombok.Setter;
 @lombok.NoArgsConstructor(force = true)
 @Getter
 @Setter
-
+// say to Modulith that this class is exposed to other modules
+@NamedInterface
 public class Customer {
 
 	@Id

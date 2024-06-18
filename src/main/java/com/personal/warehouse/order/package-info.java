@@ -3,5 +3,6 @@
  *
  * @see example.inventory.InventoryInternal
  */
-@org.springframework.modulith.ApplicationModule
+@org.springframework.modulith.ApplicationModule(allowedDependencies = { "customer::internal", "product::internal" })
+
 package com.personal.warehouse.order;
