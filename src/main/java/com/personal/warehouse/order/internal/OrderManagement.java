@@ -18,4 +18,8 @@ public class OrderManagement {
 		return orders.findAll();
 	}
 
+	public Order save(Order o) {
+		return (orders.save(o));
+	}
+
 }

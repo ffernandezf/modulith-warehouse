@@ -1,17 +1,11 @@
 package com.personal.warehouse.customer.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.modulith.NamedInterface;
-
-import com.personal.warehouse.order.internal.Order;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
@@ -34,11 +28,4 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-
-	@OneToMany
-	private List<Order> orders = new ArrayList<>();
-
-	public void add(Order o) {
-		orders.add(o);
-	}
 }

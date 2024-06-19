@@ -45,8 +45,8 @@ public class OrderController {
 			Customer p = custOptional.get();
 			Order o = new Order();
 			o.setOrderNumber(orderNb);
-			p.add(o);
-			customerService.save(p);
+			o.setCustomer(p);
+			orderService.save(o);
 			return ResponseEntity.ok(o);
 		} else {
 			return ResponseEntity.notFound().build();

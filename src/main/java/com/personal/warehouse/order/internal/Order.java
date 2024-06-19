@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.modulith.NamedInterface;
 
+import com.personal.warehouse.customer.internal.Customer;
 import com.personal.warehouse.product.internal.Product;
 
 import jakarta.persistence.Entity;
@@ -34,6 +35,9 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@ManyToOne
+	private Customer customer;
+
 	private String orderNumber;
 	private String status = "OPEN";
 
