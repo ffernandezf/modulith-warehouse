@@ -1,5 +1,6 @@
 package com.personal.warehouse.order.internal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.modulith.NamedInterface;
@@ -34,9 +35,23 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String orderNumber;
+	private String status = "OPEN";
 
 	@OneToMany
-	private List<OrderLine> lines;
+	private List<OrderLine> lines = new ArrayList<OrderLine>();
+
+	Order complete() {
+
+		this.status = "COMPLETED";
+		return this;
+	}
+
+	Order add(OrderLine line) {
+
+		this.lines.add(line);
+		return this;
+	}
+
 }
 
 @Entity

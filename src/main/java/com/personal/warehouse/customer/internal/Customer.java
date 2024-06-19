@@ -1,5 +1,6 @@
 package com.personal.warehouse.customer.internal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.modulith.NamedInterface;
@@ -35,5 +36,9 @@ public class Customer {
 	private String name;
 
 	@OneToMany
-	private List<Order> orders;
+	private List<Order> orders = new ArrayList<>();
+
+	public void add(Order o) {
+		orders.add(o);
+	}
 }
