@@ -1,11 +1,17 @@
 package com.personal.warehouse.order.internal;
 
+import java.util.List;
+
 import org.springframework.modulith.NamedInterface;
+
+import com.personal.warehouse.product.internal.Product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
@@ -28,4 +34,28 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String orderNumber;
+
+	@OneToMany
+	private List<OrderLine> lines;
+}
+
+@Entity
+@Table(name = "CUSTOMER_ORDERS_LINES")
+@Getter
+@Setter
+@lombok.NoArgsConstructor
+@lombok.EqualsAndHashCode(onlyExplicitlyIncluded = true)
+class OrderLine {
+	@Include
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@ManyToOne
+	private Product product;
+
+	private int quantity;
+	private double price;
+	private double totalPrice;
+
 }
