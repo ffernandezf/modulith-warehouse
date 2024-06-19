@@ -1,11 +1,16 @@
 package com.personal.warehouse.customer.internal;
 
+import java.util.List;
+
 import org.springframework.modulith.NamedInterface;
+
+import com.personal.warehouse.order.internal.Order;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
@@ -23,9 +28,12 @@ import lombok.Setter;
 @NamedInterface
 public class Customer {
 
+	@Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Include
 	private Long id;
 	private String name;
+
+	@OneToMany
+	private List<Order> orders;
 }
