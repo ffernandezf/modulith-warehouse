@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.warehouse.customer.CustomerEvents.OrderReceived;
+import com.personal.warehouse.customer.CustomerEvents;
 import com.personal.warehouse.customer.CustomerOrderDTO;
 import com.personal.warehouse.order.internal.Order;
 import com.personal.warehouse.order.internal.OrderManagement;
@@ -47,7 +47,7 @@ public class OrderController {
 		CustomerOrderDTO odto = new CustomerOrderDTO();
 		odto.setOrderNumber(o.getOrderNumber());
 		odto.setReceivedCustomerId(o.getReceivedCustomerId());
-		events.publishEvent(new OrderReceived(odto));
+		events.publishEvent(new CustomerEvents.OrderReceived(odto));
 		return ResponseEntity.ok(o);
 		// Optional<Customer> custOptional = customerService.findById(customerId);
 		// if (custOptional.isPresent()) {
