@@ -33,13 +33,13 @@ public class OrderController {
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/orders
-	public ResponseEntity<List<Order>> getAllProducts() {
+	public ResponseEntity<List<Order>> getAllOrders() {
 		return ResponseEntity.ok(orderService.findAll());
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	// curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNumber=FFF20240619001"
-	public ResponseEntity<Order> createProduct(@RequestParam Long customerId, @RequestParam String orderNb) {
+	public ResponseEntity<Order> createOrder(@RequestParam Long customerId, @RequestParam String orderNb) {
 		Optional<Customer> custOptional = customerService.findById(customerId);
 		if (custOptional.isPresent()) {
 			Customer p = custOptional.get();
