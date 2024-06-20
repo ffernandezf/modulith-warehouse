@@ -38,6 +38,7 @@ public class Order {
 	@ManyToOne
 	private Customer customer;
 
+	private Long receivedCustomerId;
 	private String orderNumber;
 	private String status = "OPEN";
 

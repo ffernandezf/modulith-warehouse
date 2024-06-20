@@ -3,7 +3,12 @@ package com.personal.warehouse.customer.internal;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+
+import com.personal.warehouse.customer.CustomerEvents.OrderReceived;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CustomerManagement {
+
+	private Logger LOG = LoggerFactory.getLogger(CustomerManagement.class);
 
 	private final CustomerRepository customers;
 
@@ -35,5 +42,10 @@ public class CustomerManagement {
 
 	public void deleteById(Long id) {
 		customers.deleteById(id);
+	}
+
+	@EventListener
+	void onEvent(OrderReceived event) {
+		LOG.info("new Order received {}", event);
 	}
 }

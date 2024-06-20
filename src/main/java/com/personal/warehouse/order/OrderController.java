@@ -1,10 +1,10 @@
 package com.personal.warehouse.order;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.warehouse.customer.internal.Customer;
-import com.personal.warehouse.customer.internal.CustomerManagement;
+import com.personal.warehouse.customer.CustomerEvents.OrderReceived;
+import com.personal.warehouse.customer.CustomerOrderDTO;
 import com.personal.warehouse.order.internal.Order;
 import com.personal.warehouse.order.internal.OrderManagement;
 
@@ -24,11 +24,11 @@ public class OrderController {
 	private final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	private final OrderManagement orderService;
-	private final CustomerManagement customerService;
+	private final ApplicationEventPublisher events;
 
-	public OrderController(OrderManagement ordService, CustomerManagement custService) {
+	public OrderController(OrderManagement ordService, ApplicationEventPublisher events) {
 		this.orderService = ordService;
-		this.customerService = custService;
+		this.events = events;
 	}
 
 	@GetMapping
@@ -38,18 +38,25 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	// curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNumber=FFF20240619001"
+	// curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240619001"
 	public ResponseEntity<Order> createOrder(@RequestParam Long customerId, @RequestParam String orderNb) {
-		Optional<Customer> custOptional = customerService.findById(customerId);
-		if (custOptional.isPresent()) {
-			Customer p = custOptional.get();
-			Order o = new Order();
-			o.setOrderNumber(orderNb);
-			o.setCustomer(p);
-			orderService.save(o);
-			return ResponseEntity.ok(o);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+		Order o = new Order();
+		o.setOrderNumber(orderNb);
+		o.setReceivedCustomerId(customerId);
+		orderService.save(o);
+		CustomerOrderDTO odto = new CustomerOrderDTO();
+		odto.setOrderNumber(o.getOrderNumber());
+		odto.setReceivedCustomerId(o.getReceivedCustomerId());
+		events.publishEvent(new OrderReceived(odto));
+		return ResponseEntity.ok(o);
+		// Optional<Customer> custOptional = customerService.findById(customerId);
+		// if (custOptional.isPresent()) {
+		// Customer p = custOptional.get();
+		// o.setCustomer(p);
+		// orderService.save(o);
+		// return ResponseEntity.ok(o);
+		// } else {
+		// return ResponseEntity.notFound().build();
+		// }
 	}
 }
