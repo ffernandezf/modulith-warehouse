@@ -39,24 +39,25 @@ public class OrderController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	// curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240619001"
-	public ResponseEntity<Order> createOrder(@RequestParam Long customerId, @RequestParam String orderNb) {
+	public ResponseEntity<OrderDTO> createOrder(@RequestParam Long customerId, @RequestParam String orderNb) {
 		Order o = new Order();
 		o.setOrderNumber(orderNb);
 		o.setReceivedCustomerId(customerId);
-		orderService.save(o);
-		CustomerOrderDTO odto = new CustomerOrderDTO();
-		odto.setOrderNumber(o.getOrderNumber());
-		odto.setReceivedCustomerId(o.getReceivedCustomerId());
-		events.publishEvent(new CustomerEvents.OrderReceived(odto));
-		return ResponseEntity.ok(o);
-		// Optional<Customer> custOptional = customerService.findById(customerId);
-		// if (custOptional.isPresent()) {
-		// Customer p = custOptional.get();
-		// o.setCustomer(p);
-		// orderService.save(o);
-		// return ResponseEntity.ok(o);
-		// } else {
-		// return ResponseEntity.notFound().build();
-		// }
+		o.addMessage("Order received. Being processed");
+		Order savedOrder = orderService.save(o);
+
+		// publish the event to find the customer
+		CustomerOrderDTO cdto = new CustomerOrderDTO();
+		cdto.setOrderNumber(savedOrder.getOrderNumber());
+		cdto.setReceivedCustomerId(savedOrder.getReceivedCustomerId());
+		events.publishEvent(new CustomerEvents.OrderReceived(cdto));
+
+		// responds to the client
+		OrderDTO odto = new OrderDTO();
+		odto.setId(savedOrder.getId());
+		odto.setOrderNumber(savedOrder.getOrderNumber());
+		odto.setReceivedCustomerId(savedOrder.getReceivedCustomerId());
+		odto.setMessage("Order received. Please track the status to check the progress");
+		return ResponseEntity.ok(odto);
 	}
 }

@@ -45,6 +45,8 @@ public class Order {
 	@OneToMany
 	private List<OrderLine> lines = new ArrayList<OrderLine>();
 
+	private StringBuilder statusMessages = new StringBuilder();
+
 	Order complete() {
 
 		this.status = "COMPLETED";
@@ -54,6 +56,13 @@ public class Order {
 	Order add(OrderLine line) {
 
 		this.lines.add(line);
+		return this;
+	}
+
+	public Order addMessage(String msg) {
+		if (!this.statusMessages.isEmpty())
+			this.statusMessages.append(";\n");
+		this.statusMessages.append(msg);
 		return this;
 	}
 

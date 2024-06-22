@@ -1,0 +1,11 @@
+#create order
+curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240619001"
+
+#check orders
+curl -X GET "http://localhost:8080/orders"
+
+#check customers
+curl -X GET http://localhost:8080/customers
+
+#add customer
+curl -X POST "http://localhost:8080/customers/add?name=Ericsson"
