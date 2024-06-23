@@ -19,5 +19,5 @@ curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF202406240
 #check orders
 curl -X GET "http://localhost:8080/orders"
 
-#add product to order
+#add product to order (if product does not exist, order will not complete)
 curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=switchboard-00-001&quantity=1"

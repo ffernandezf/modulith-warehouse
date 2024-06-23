@@ -15,7 +15,5 @@ curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF202406240
 #add product to order
 curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=switchboard-00-001&quantity=1"
 curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=mainController-99-001&quantity=1"
-
-pause
 curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=mainController-00-001&quantity=1"
 pause
