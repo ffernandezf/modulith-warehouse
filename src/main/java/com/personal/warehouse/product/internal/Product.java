@@ -19,6 +19,7 @@ import lombok.Setter;
 @lombok.NoArgsConstructor(force = true)
 @Getter
 @Setter
+@lombok.ToString
 // say to Modulith that this class is exposed to other modules
 @NamedInterface
 public class Product {

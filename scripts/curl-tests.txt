@@ -1,0 +1,23 @@
+set JAVA_HOME="C:\$user\Java\jdk-17.0.7+7"
+
+#check customers
+curl -X GET http://localhost:8080/customers
+
+#add customer
+curl -X POST "http://localhost:8080/customers/add?name=Ericsson"
+
+#list products
+curl -X GET http://localhost:8080/products
+
+#add product
+curl -X POST "http://localhost:8080/products/add?name=switchboard-00-001&qtty=1&value=1289.25"
+curl -X POST "http://localhost:8080/products/add?name=mainController-99-001&qtty=1&value=5986.50"
+
+#create order
+curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240624001"
+
+#check orders
+curl -X GET "http://localhost:8080/orders"
+
+#add product to order
+curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=switchboard-00-001&quantity=1"
