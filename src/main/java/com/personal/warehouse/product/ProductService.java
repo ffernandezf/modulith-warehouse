@@ -1,24 +1,20 @@
 package com.personal.warehouse.product;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Service;
 
-import com.personal.warehouse.notification.NotificationDTO;
-import com.personal.warehouse.notification.NotificationService;
-import com.personal.warehouse.notification.internal.NotificationType;
 import com.personal.warehouse.product.internal.Product;
+import com.personal.warehouse.product.internal.ProductManagement;
 
 @Service
 public class ProductService {
 
-	private final NotificationService notificationService;
+	private final ProductManagement productService;
 
-	public ProductService(NotificationService notificationService) {
-		this.notificationService = notificationService;
+	public ProductService(ProductManagement productService) {
+		this.productService = productService;
 	}
 
 	public void create(Product product) {
-		notificationService.createNotification(new NotificationDTO(new Date(), NotificationType.SMS, product.getName()));
+		productService.create(product.getName(), product.getQuantity(), product.getPrice());
 	}
 }
