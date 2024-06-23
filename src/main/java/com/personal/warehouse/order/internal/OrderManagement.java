@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.personal.warehouse.customer.CustomerEvents.CustomerFound;
 import com.personal.warehouse.customer.CustomerEvents.CustomerNotFound;
+import com.personal.warehouse.product.ProductEvents.OrderProductFound;
+import com.personal.warehouse.product.ProductEvents.OrderProductNotFound;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +65,34 @@ public class OrderManagement {
 			o.setCustomer(event.order().getCustomer());
 			o.addMessage("Customer NOT Found");
 			o.setStatus("TERMINATED");
+			orders.save(o);
+		}
+	}
+
+	@EventListener
+	void onEvent(OrderProductFound event) {
+		LOG.info("OrderProduct fould {}", event);
+
+		// check status in all the items and set the order status
+		Optional<Order> orderOptional = findByOrderNumber(event.order().getOrderNumber());
+		if (orderOptional.isPresent()) {
+			Order o = orderOptional.get();
+			if ("CUSTOMER-FOUND".equals(o.getStatus()))
+				o.setStatus("READY");
+			orders.save(o);
+		}
+	}
+
+	@EventListener
+	void onEvent(OrderProductNotFound event) {
+		LOG.info("OrderProduct fould {}", event);
+
+		// check status in all the items and set the order status
+		Optional<Order> orderOptional = findByOrderNumber(event.order().getOrderNumber());
+		if (orderOptional.isPresent()) {
+			Order o = orderOptional.get();
+			o.addMessage(String.format("unknown product in line %d", event.order().getNumItem()));
+			o.setStatus("WRONG-LINE-ITEMS");
 			orders.save(o);
 		}
 	}

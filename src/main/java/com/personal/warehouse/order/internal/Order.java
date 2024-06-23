@@ -50,7 +50,7 @@ public class Order {
 	@JsonManagedReference // includes those fields in the generated json
 	private List<OrderLine> lines = new ArrayList<>();
 
-	private StringBuilder statusMessages = new StringBuilder();
+	private String statusMessages;
 
 	Order complete() {
 
@@ -77,9 +77,11 @@ public class Order {
 	}
 
 	public Order addMessage(String msg) {
-		if (!this.statusMessages.isEmpty())
-			this.statusMessages.append(";\n");
-		this.statusMessages.append(msg);
+		StringBuilder aux = new StringBuilder();
+		if (null != statusMessages)
+			aux.append(statusMessages).append(";");
+		aux.append(msg);
+		statusMessages = aux.toString();
 		return this;
 	}
 
