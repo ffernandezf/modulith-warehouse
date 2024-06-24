@@ -49,6 +49,7 @@ public class CustomerManagement {
 		customers.deleteById(id);
 	}
 
+	// @Async // to make the event async
 	@EventListener
 	void onEvent(OrderReceived event) {
 		LOG.info("new Order received {}", event);
