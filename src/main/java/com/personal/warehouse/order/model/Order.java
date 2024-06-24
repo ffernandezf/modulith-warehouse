@@ -3,8 +3,6 @@ package com.personal.warehouse.order.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.modulith.NamedInterface;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.personal.warehouse.customer.model.Customer;
 
@@ -28,8 +26,6 @@ import lombok.Setter;
 @lombok.ToString
 @Getter
 @Setter
-// say to Modulith that this class is exposed to other modules
-@NamedInterface
 public class Order {
 
 	@Include
