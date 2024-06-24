@@ -1,9 +1,8 @@
 package com.personal.warehouse.customer;
 
-import lombok.EqualsAndHashCode.Include;
-
 import com.personal.warehouse.customer.model.Customer;
 
+import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +21,6 @@ public class CustomerOrderDTO {
 	private Long receivedCustomerId;
 	private Customer customer;
 	private String orderNumber;
-	private String status = "OPEN";
+	private String status;
+	private String message;
 }

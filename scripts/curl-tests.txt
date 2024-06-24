@@ -15,6 +15,7 @@ curl -X POST "http://localhost:8080/products/add?name=mainController-99-001&qtty
 
 #create order
 curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240624001"
+curl -X POST "http://localhost:8080/orders/add?customerId=5&orderNb=FFF20240624002"
 
 #check orders
 curl -X GET "http://localhost:8080/orders"

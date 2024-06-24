@@ -106,7 +106,8 @@ public class OrderController {
 		odto.setId(savedOrder.getId());
 		odto.setOrderNumber(savedOrder.getOrderNumber());
 		odto.setReceivedCustomerId(savedOrder.getReceivedCustomerId());
-		odto.setMessage("Order received. Please track the status to check the progress");
+		odto.setStatus(cdto.getStatus());
+		odto.setMessage(cdto.getMessage());
 		return ResponseEntity.ok(odto);
 	}
 }

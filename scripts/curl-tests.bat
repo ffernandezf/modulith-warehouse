@@ -13,6 +13,7 @@ curl -X POST "http://localhost:8080/products/add?name=PCB-1000-001&qtty=3&value=
 
 #create order
 curl -X POST "http://localhost:8080/orders/add?customerId=1&orderNb=FFF20240624001"
+curl -X POST "http://localhost:8080/orders/add?customerId=5&orderNb=FFF20240624002"
 
 #add product to order
 curl -X POST "http://localhost:8080/orders/FFF20240624001/addProduct?productNumber=switchboard-00-001&quantity=1"

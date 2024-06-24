@@ -54,6 +54,8 @@ public class OrderManagement {
 			o.addMessage("Customer Found");
 			o.setStatus("CUSTOMER-FOUND");
 			orders.save(o);
+			event.order().setStatus(o.getStatus());
+			event.order().setMessage(o.getStatusMessages());
 		}
 	}
 
@@ -68,6 +70,8 @@ public class OrderManagement {
 			o.addMessage("Customer NOT Found");
 			o.setStatus("TERMINATED");
 			orders.save(o);
+			event.order().setStatus(o.getStatus());
+			event.order().setMessage(o.getStatusMessages());
 		}
 	}
 
