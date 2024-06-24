@@ -1,4 +1,4 @@
-package com.personal.warehouse.order;
+package com.personal.warehouse.order.internal;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.warehouse.customer.CustomerEvents;
 import com.personal.warehouse.customer.CustomerOrderDTO;
-import com.personal.warehouse.order.internal.Order;
-import com.personal.warehouse.order.internal.OrderLineManagement;
-import com.personal.warehouse.order.internal.OrderManagement;
+import com.personal.warehouse.order.OrderDTO;
 import com.personal.warehouse.product.OrderProductDTO;
 import com.personal.warehouse.product.ProductEvents.OrderProductRequested;
 

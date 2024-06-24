@@ -1,4 +1,4 @@
-package com.personal.warehouse.product;
+package com.personal.warehouse.product.internal;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.personal.warehouse.product.internal.Product;
-import com.personal.warehouse.product.internal.ProductManagement;
 
 @RestController
 @RequestMapping("/products")
