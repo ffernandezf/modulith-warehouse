@@ -1,20 +1,17 @@
-package com.personal.warehouse.order.internal;
+package com.personal.warehouse.order.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.modulith.NamedInterface;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.personal.warehouse.customer.internal.Customer;
-import com.personal.warehouse.product.internal.Product;
+import com.personal.warehouse.customer.model.Customer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -84,36 +81,5 @@ public class Order {
 		statusMessages = aux.toString();
 		return this;
 	}
-
-}
-
-@Entity
-@Table(name = "CUSTOMER_ORDERS_LINES")
-@Getter
-@Setter
-@lombok.NoArgsConstructor
-@lombok.EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@lombok.ToString
-class OrderLine {
-	@Include
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	private int numItem;
-
-	@ManyToOne
-	private Product product;
-
-	@ManyToOne
-	@JoinColumn(name = "order_id")
-	@JsonBackReference // to not include this field in the generated JSON (avoid recursive loop)
-	private Order order;
-
-	private String productNumber;
-	private int quantity;
-	private String status;
-	private double price;
-	private double totalPrice;
 
 }

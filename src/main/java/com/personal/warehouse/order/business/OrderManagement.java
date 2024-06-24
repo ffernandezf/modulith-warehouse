@@ -1,4 +1,4 @@
-package com.personal.warehouse.order.internal;
+package com.personal.warehouse.order.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.personal.warehouse.customer.CustomerEvents.CustomerFound;
 import com.personal.warehouse.customer.CustomerEvents.CustomerNotFound;
+import com.personal.warehouse.order.model.Order;
+import com.personal.warehouse.order.persistence.OrderRepository;
 import com.personal.warehouse.product.ProductEvents.OrderProductFound;
 import com.personal.warehouse.product.ProductEvents.OrderProductNotFound;
 

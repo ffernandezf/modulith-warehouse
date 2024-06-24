@@ -1,4 +1,4 @@
-package com.personal.warehouse.order.internal;
+package com.personal.warehouse.order.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.personal.warehouse.customer.CustomerEvents;
 import com.personal.warehouse.customer.CustomerOrderDTO;
 import com.personal.warehouse.order.OrderDTO;
+import com.personal.warehouse.order.business.OrderLineManagement;
+import com.personal.warehouse.order.business.OrderManagement;
+import com.personal.warehouse.order.model.Order;
 import com.personal.warehouse.product.OrderProductDTO;
 import com.personal.warehouse.product.ProductEvents.OrderProductRequested;
 
@@ -36,13 +39,6 @@ public class OrderController {
 
 	@Autowired
 	private ApplicationEventPublisher events;
-
-	// not used constructor. Using @Autowired instead
-	// public OrderController(OrderManagement ordService, OrderLineManagement orderLineService, ApplicationEventPublisher events) {
-	// this.orderService = ordService;
-	// this.orderLineService = orderLineService;
-	// this.events = events;
-	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/orders

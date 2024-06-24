@@ -1,4 +1,4 @@
-package com.personal.warehouse.customer.internal;
+package com.personal.warehouse.customer.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.personal.warehouse.customer.CustomerEvents;
 import com.personal.warehouse.customer.CustomerEvents.OrderReceived;
+import com.personal.warehouse.customer.model.Customer;
+import com.personal.warehouse.customer.persistence.CustomerRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

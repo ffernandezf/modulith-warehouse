@@ -1,8 +1,9 @@
 package com.personal.warehouse.customer;
 
-import com.personal.warehouse.customer.internal.Customer;
-
 import lombok.EqualsAndHashCode.Include;
+
+import com.personal.warehouse.customer.model.Customer;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

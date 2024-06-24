@@ -1,4 +1,4 @@
-package com.personal.warehouse.product.internal;
+package com.personal.warehouse.product.business;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.personal.warehouse.product.ProductEvents;
 import com.personal.warehouse.product.ProductEvents.OrderProductRequested;
+import com.personal.warehouse.product.model.Product;
+import com.personal.warehouse.product.persistence.ProductRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

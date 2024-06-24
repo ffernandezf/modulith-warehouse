@@ -1,4 +1,4 @@
-package com.personal.warehouse.order.internal;
+package com.personal.warehouse.order.business;
 
 import java.util.Optional;
 
@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import com.personal.warehouse.order.model.OrderLine;
+import com.personal.warehouse.order.persistence.OrderLineRepository;
 import com.personal.warehouse.product.ProductEvents.OrderProductFound;
 import com.personal.warehouse.product.ProductEvents.OrderProductNotFound;
 

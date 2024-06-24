@@ -1,4 +1,4 @@
-package com.personal.warehouse.customer.internal;
+package com.personal.warehouse.customer.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.personal.warehouse.customer.business.CustomerManagement;
+import com.personal.warehouse.customer.model.Customer;
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -25,11 +28,6 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerManagement customerService;
-
-	// not needed since @Autowired is used
-	// public CustomerController(CustomerManagement custService) {
-	// this.customerService = custService;
-	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/customers

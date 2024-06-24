@@ -1,4 +1,4 @@
-package com.personal.warehouse.product.internal;
+package com.personal.warehouse.product.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.personal.warehouse.product.business.ProductManagement;
+import com.personal.warehouse.product.model.Product;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -25,11 +28,6 @@ public class ProductController {
 
 	@Autowired
 	private ProductManagement productService;
-
-	// constructor not needed. Using @Autowired instead
-	// public ProductController(ProductManagement productService) {
-	// this.productService = productService;
-	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/products
