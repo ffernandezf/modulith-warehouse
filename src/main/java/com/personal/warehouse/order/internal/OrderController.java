@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +28,21 @@ public class OrderController {
 
 	private final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
-	private final OrderManagement orderService;
-	private final OrderLineManagement orderLineService;
-	private final ApplicationEventPublisher events;
+	@Autowired
+	private OrderManagement orderService;
 
-	public OrderController(OrderManagement ordService, OrderLineManagement orderLineService, ApplicationEventPublisher events) {
-		this.orderService = ordService;
-		this.orderLineService = orderLineService;
-		this.events = events;
-	}
+	@Autowired
+	private OrderLineManagement orderLineService;
+
+	@Autowired
+	private ApplicationEventPublisher events;
+
+	// not used constructor. Using @Autowired instead
+	// public OrderController(OrderManagement ordService, OrderLineManagement orderLineService, ApplicationEventPublisher events) {
+	// this.orderService = ordService;
+	// this.orderLineService = orderLineService;
+	// this.events = events;
+	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/orders

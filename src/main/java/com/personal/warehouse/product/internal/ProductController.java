@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,13 @@ public class ProductController {
 
 	private final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
-	private final ProductManagement productService;
+	@Autowired
+	private ProductManagement productService;
 
-	public ProductController(ProductManagement productService) {
-		this.productService = productService;
-	}
+	// constructor not needed. Using @Autowired instead
+	// public ProductController(ProductManagement productService) {
+	// this.productService = productService;
+	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/products

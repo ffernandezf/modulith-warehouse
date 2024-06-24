@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,13 @@ public class CustomerController {
 
 	private final Logger LOG = LoggerFactory.getLogger(CustomerController.class);
 
-	private final CustomerManagement customerService;
+	@Autowired
+	private CustomerManagement customerService;
 
-	public CustomerController(CustomerManagement custService) {
-		this.customerService = custService;
-	}
+	// not needed since @Autowired is used
+	// public CustomerController(CustomerManagement custService) {
+	// this.customerService = custService;
+	// }
 
 	@GetMapping
 	// curl -X GET http://localhost:8080/customers
